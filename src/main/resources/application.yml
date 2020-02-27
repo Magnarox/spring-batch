@@ -1,0 +1,8 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.0.32:5432/postgres
+    username: postgres
+    password:
+server:
+  port: 8090
