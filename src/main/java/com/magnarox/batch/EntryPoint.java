@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class EntryPoint {
 
     @Autowired
-    Job importUserJob;
+    private Job importUserJob;
 
     @Autowired
-    JobLauncher jobLauncher;
+    private JobLauncher jobLauncher;
 
     @GetMapping("start")
     public ResponseEntity<String> start() {

@@ -4,18 +4,19 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "people", schema = "public", catalog = "postgres")
+@Table(name = "people")
 public class TutoPeople {
-    private Long personId;
+    private Integer personId;
     private String firstName;
     private String lastName;
 
     @Id
-    public Long getPersonId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setPersonId(Integer personId) {
         this.personId = personId;
     }
 

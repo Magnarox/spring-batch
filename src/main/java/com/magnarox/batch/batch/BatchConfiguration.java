@@ -23,10 +23,10 @@ import org.springframework.core.io.ClassPathResource;
 public class BatchConfiguration {
 
     @Autowired
-    JobBuilderFactory jobBuilderFactory;
+    private JobBuilderFactory jobBuilderFactory;
 
     @Autowired
-    StepBuilderFactory stepBuilderFactory;
+    private StepBuilderFactory stepBuilderFactory;
 
     @Bean
     public FlatFileItemReader<TutoPeople> reader() {
@@ -47,13 +47,13 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public JpaRepositoryItemWriter<TutoPeople> writer(TutoPeopleRepository repository) {
+    public JpaRepositoryItemWriter<TutoPeople> writer(final TutoPeopleRepository repository) {
 
         return new JpaRepositoryItemWriter<>(repository);
     }
 
     @Bean
-    public Job importUserJob(BatchJobExecutionListener listener, Step step1) {
+    public Job importUserJob(final BatchJobExecutionListener listener, Step step1) {
         return jobBuilderFactory.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -63,7 +63,7 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1(JpaRepositoryItemWriter<TutoPeople> writer) {
+    public Step step1(final JpaRepositoryItemWriter<TutoPeople> writer) {
         return stepBuilderFactory.get("step1")
                 .<TutoPeople, TutoPeople>chunk(10)
                 .reader(reader())

@@ -3,8 +3,7 @@ package com.magnarox.batch.batch;
 import com.magnarox.batch.entities.TutoPeople;
 import org.springframework.batch.item.ItemProcessor;
 
-public class PersonItemProcessor implements  ItemProcessor<TutoPeople, TutoPeople> {
-    public static long i = 0;
+public class PersonItemProcessor implements ItemProcessor<TutoPeople, TutoPeople> {
 
     @Override
     public TutoPeople process(final TutoPeople person) throws Exception {
@@ -13,7 +12,7 @@ public class PersonItemProcessor implements  ItemProcessor<TutoPeople, TutoPeopl
 
         final TutoPeople transformedPerson = new TutoPeople();
 
-        transformedPerson.setPersonId(i++);
+        transformedPerson.setPersonId(null);
         transformedPerson.setFirstName(firstName);
         transformedPerson.setLastName(lastName);
 

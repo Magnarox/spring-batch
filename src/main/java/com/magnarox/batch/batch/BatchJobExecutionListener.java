@@ -12,18 +12,18 @@ import java.util.List;
 @Component
 public class BatchJobExecutionListener extends JobExecutionListenerSupport {
 
-    TutoPeopleRepository peopleRepository;
+    private final TutoPeopleRepository peopleRepository;
 
-    public BatchJobExecutionListener(TutoPeopleRepository peopleRepository) {
+    public BatchJobExecutionListener(final TutoPeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
 
     @Override
-    public void afterJob(JobExecution jobExecution) {
+    public void afterJob(final JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             System.out.println("!!! JOB FINISHED! Time to verify the results");
 
-            List<TutoPeople> all = this.peopleRepository.findAll();
+            final List<TutoPeople> all = this.peopleRepository.findAll();
 
             System.out.println("People Find : " + all.size());
 
