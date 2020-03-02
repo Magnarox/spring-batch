@@ -9,6 +9,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 @Configuration
 @EnableAutoConfiguration
@@ -29,10 +34,23 @@ public class BatchConfiguration {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
+    public MultiResourceItemReader<TutoPeople> multiResourceItemReader() throws IOException {
+        final File inputDir = new ClassPathResource("input").getFile();
+        if (!inputDir.exists() || !inputDir.isDirectory())
+            throw new IOException("Bad input configuration");
+
+        final ClassPathResource[] inputResources = Arrays.stream(inputDir.list()).map(x -> "input/" + x).map(ClassPathResource::new).toArray(ClassPathResource[]::new);
+
+        final MultiResourceItemReader<TutoPeople> resourceItemReader = new MultiResourceItemReader<TutoPeople>();
+        resourceItemReader.setResources(inputResources);
+        resourceItemReader.setDelegate(reader());
+        return resourceItemReader;
+    }
+
+    @Bean
     public FlatFileItemReader<TutoPeople> reader() {
         return new FlatFileItemReaderBuilder<TutoPeople>()
                 .name("personReader")
-                .resource(new ClassPathResource("sample-data.csv"))
                 .delimited()
                 .names(new String[]{"firstName", "lastName"})
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<TutoPeople>() {{
@@ -47,13 +65,13 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public JpaRepositoryItemWriter<TutoPeople> writer(final TutoPeopleRepository repository) {
+    public JpaRepositoryItemWriter<TutoPeople> writer(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") final TutoPeopleRepository repository) {
 
         return new JpaRepositoryItemWriter<>(repository);
     }
 
     @Bean
-    public Job importUserJob(final BatchJobExecutionListener listener, Step step1) {
+    public Job importUserJob(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") final BatchJobExecutionListener listener, Step step1) {
         return jobBuilderFactory.get("importUserJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -63,10 +81,10 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1(final JpaRepositoryItemWriter<TutoPeople> writer) {
+    public Step step1(final JpaRepositoryItemWriter<TutoPeople> writer) throws IOException {
         return stepBuilderFactory.get("step1")
                 .<TutoPeople, TutoPeople>chunk(10)
-                .reader(reader())
+                .reader(multiResourceItemReader())
                 .processor(processor())
                 .writer(writer)
                 .build();

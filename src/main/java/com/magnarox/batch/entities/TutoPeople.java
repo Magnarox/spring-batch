@@ -52,4 +52,14 @@ public class TutoPeople {
     public int hashCode() {
         return Objects.hash(personId, firstName, lastName);
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        if (this.firstName != null)
+            result = this.firstName + " ";
+        if (this.lastName != null)
+            result = result + this.lastName;
+        return result;
+    }
 }
