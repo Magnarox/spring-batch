@@ -1,10 +1,10 @@
-package com.magnarox.batch;
+package com.magnarox.batch.worker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BatchManagerApplicationTests {
+class BatchWorkerApplicationTests {
 
 	@Test
 	void contextLoads() {

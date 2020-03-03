@@ -1,4 +1,4 @@
-package com.magnarox.batch.batch;
+package com.magnarox.batch.worker.batch;
 
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;

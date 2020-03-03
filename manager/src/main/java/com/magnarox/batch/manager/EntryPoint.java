@@ -1,4 +1,4 @@
-package com.magnarox.batch;
+package com.magnarox.batch.manager;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

@@ -1,7 +1,7 @@
-package com.magnarox.batch.batch;
+package com.magnarox.batch.manager.batch;
 
-import com.magnarox.batch.entities.TutoPeople;
-import com.magnarox.batch.repositories.TutoPeopleRepository;
+import com.magnarox.batch.manager.entities.TutoPeople;
+import com.magnarox.batch.manager.repositories.TutoPeopleRepository;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;

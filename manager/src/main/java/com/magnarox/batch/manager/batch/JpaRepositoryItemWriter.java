@@ -1,4 +1,4 @@
-package com.magnarox.batch.batch;
+package com.magnarox.batch.manager.batch;
 
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.data.jpa.repository.JpaRepository;

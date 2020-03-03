@@ -1,7 +1,7 @@
-package com.magnarox.batch.batch;
+package com.magnarox.batch.worker.batch;
 
-import com.magnarox.batch.entities.TutoPeople;
-import com.magnarox.batch.repositories.TutoPeopleRepository;
+import com.magnarox.batch.worker.entities.TutoPeople;
+import com.magnarox.batch.worker.repositories.TutoPeopleRepository;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;

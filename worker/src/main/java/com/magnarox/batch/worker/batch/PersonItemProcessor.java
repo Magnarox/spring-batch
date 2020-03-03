@@ -1,6 +1,6 @@
-package com.magnarox.batch.batch;
+package com.magnarox.batch.worker.batch;
 
-import com.magnarox.batch.entities.TutoPeople;
+import com.magnarox.batch.worker.entities.TutoPeople;
 import org.springframework.batch.item.ItemProcessor;
 
 public class PersonItemProcessor implements ItemProcessor<TutoPeople, TutoPeople> {
