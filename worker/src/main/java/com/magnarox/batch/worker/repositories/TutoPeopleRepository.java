@@ -1,6 +1,6 @@
-package com.magnarox.batch.manager.repositories;
+package com.magnarox.batch.worker.repositories;
 
-import com.magnarox.batch.manager.entities.TutoPeople;
+import com.magnarox.batch.worker.entities.TutoPeople;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

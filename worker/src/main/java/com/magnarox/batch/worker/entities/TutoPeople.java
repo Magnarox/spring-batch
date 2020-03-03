@@ -1,4 +1,4 @@
-package com.magnarox.batch.manager.entities;
+package com.magnarox.batch.worker.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
