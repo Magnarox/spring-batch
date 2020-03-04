@@ -1,6 +1,24 @@
 # spring-batch
 
-## Getting Started
+Launch Spring Batch Job with remote partitioning with Kafka as middleware to ingest some csv files in a PostgreSQL database.
+
+## Inspired by
+
+* [Spring Batch Integration](https://docs.spring.io/spring-batch/docs/current-SNAPSHOT/reference/html/spring-batch-integration.html)
+
+## Prepare environment
+
+Modify `manager/src/main/docker/docker-compose.dependencies.yml` with your IP in Kafka config then launch this docker-compose file to run PostgreSQL and Kafka.
+
+Apply `manager/src/main/resources/gen.sql` to the PostgreSQL database.
+
+Update `manager/src/main/resources/application.yml` and `worker/src/main/resources/application.yml` with your environment values.
+
+## Run Application
+
+Launch 1 Manager and up to 3 Worker.
+
+Start Batch process by entering `http://localhost:8090/api/start` in your favorite web browser. 
 
 ### Reference Documentation
 For further reference, please consider the following sections:
@@ -18,7 +36,3 @@ The following guides illustrate how to use some features concretely:
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
-### Inspired by
-
-* [Spring Batch Integration](https://docs.spring.io/spring-batch/docs/current-SNAPSHOT/reference/html/spring-batch-integration.html)
