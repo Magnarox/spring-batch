@@ -15,3 +15,6 @@ spring:
 
 server:
   port: 8090
+
+application:
+  data-path: 'D:\Developpement\src\spring-batch\data'
