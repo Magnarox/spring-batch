@@ -16,8 +16,6 @@ public class PersonItemProcessor implements ItemProcessor<TutoPeople, TutoPeople
         transformedPerson.setFirstName(firstName);
         transformedPerson.setLastName(lastName);
 
-        System.out.println("Converting (" + person + ") into (" + transformedPerson + ")");
-
         return transformedPerson;
     }
 }
